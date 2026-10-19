@@ -1,0 +1,18 @@
+# Cloudflare Pages reads this file to set HTTP headers.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+
+# WebAssembly files need the right content type (Cloudflare usually sets it, this makes sure).
+/*.wasm
+  Content-Type: application/wasm
+
+# Uncomment ONLY if you build a multithreaded WebAssembly engine
+# (it needs SharedArrayBuffer). These headers block loading
+# cross-origin resources on the chess page, so leave them off otherwise.
+#
+# /chess/*
+#   Cross-Origin-Opener-Policy: same-origin
+#   Cross-Origin-Embedder-Policy: require-corp

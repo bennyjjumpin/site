@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Play my chess engine | Ben [Last Name]</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="/">Ben [Last Name]</a>
+    <nav aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/resume.pdf">Résumé</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Play my chess engine</h1>
+    <p>
+      The engine runs entirely in your browser. It's my C++ engine compiled to
+      WebAssembly with Emscripten, searching in a Web Worker so the page stays
+      responsive while it thinks.
+    </p>
+
+    <!-- Replace this block with your board UI once the WebAssembly build is ready. -->
+    <div class="placeholder" id="game">
+      The board will go here once the WebAssembly build is ready.
+    </div>
+
+    <p><a href="https://github.com/YOUR-USERNAME/chess-engine">Read the source on GitHub</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Ben [Last Name]</p>
+  </footer>
+</body>
+</html>
