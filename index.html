@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Benjamin Chatman</title>
-  <meta name="description" content="Benjamin Chatman] — Mathematics and Computer Science at Michigan State University. Chess engines, C++, and real-time systems.">
+  <meta name="description" content="Benjamin Chatman — Computer Science and Mathematics at Michigan State University. Chess engines, C++ rendering, and robot software.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
     <nav aria-label="Main">
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
-      <a href="/resume.pdf">Résumé</a>
+      <a href="/Resume%20-%20Benjamin%20Chatman.pdf">Résumé</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -29,9 +29,10 @@
       <div class="hero-text">
         <h1>I write software that has to think fast.</h1>
         <p class="lede">
-          Mathematics and Computer Science student at Michigan State University.
-          I build chess engines, desktop applications in C++, and real-time
-          control code for competition robots.
+          Computer Science and Mathematics student at Michigan State University
+          and lead software developer at North Peak Leads. I build chess
+          engines, a raycasting 3D renderer in C++, and control code for
+          competition robots.
         </p>
         <p class="hero-links">
           <a class="button" href="/chess/">Play my chess engine</a>
@@ -56,39 +57,35 @@
         <div class="feature-body">
           <h3>Chess engine</h3>
           <p>
-            A chess engine I designed and wrote from scratch. The first version
-            was Python with an 8×8 board, alpha-beta search, quiescence search,
-            and MVV-LVA move ordering. I rewrote it in C++ using bitboards to
-            search several plies deeper in the same time.
+            A chess GUI and engine I designed and wrote from scratch in Python.
+            It handles every move in the standard rule book and plays at about
+            1500 Elo at its maximum depth of 5. I rewrote the engine in C++
+            using bitboards to search several plies deeper in the same time.
           </p>
           <ul class="facts">
+            <li>Alpha-beta pruning and quiescence search</li>
+            <li>Roughly 1500 Elo at maximum depth 5</li>
             <li>Bitboard move generation, verified with perft</li>
-            <li>Alpha-beta with iterative deepening and quiescence search</li>
             <li>UCI protocol, playable here in the browser via WebAssembly</li>
             <li>wxWidgets desktop GUI with a background search thread</li>
           </ul>
           <p class="feature-links">
             <a class="button" href="/chess/">Play it</a>
-            <a class="text-link" href="https://github.com/YOUR-USERNAME/chess-engine">Source code</a>
+            <a class="text-link" href="https://github.com/bennyjjumpin/chess-engine">Source code</a>
           </p>
         </div>
       </article>
 
       <ul class="project-list">
         <li>
-          <h3>Small-business database application</h3>
-          <p>Desktop app for a local company to manage its records, built in C++ with wxWidgets on top of SQLite.</p>
-          <p class="stack">C++, wxWidgets, SQLite</p>
+          <h3>3D renderer</h3>
+          <p>A raycasting engine in the style of DOOM and Wolfenstein 3D. It walks a 2D grid map to find the distance from the camera to each wall and projects the result onto the screen, running at 2000+ frames per second on low-end hardware.</p>
+          <p class="stack">C++</p>
         </li>
         <li>
           <h3>FRC Team 3357 robot software</h3>
-          <p>Lead programmer for a FIRST Robotics Competition team: autonomous routines, driver controls, and real-time subsystem code.</p>
-          <p class="stack">[Language], real-time control, Git</p>
-        </li>
-        <li>
-          <h3>[Another project]</h3>
-          <p>One or two sentences on what it does and what you learned building it.</p>
-          <p class="stack">[Technologies]</p>
+          <p>Lead programmer for a top-100 FIRST Robotics Competition team: object-oriented C++ that runs the robot both autonomously and under driver control.</p>
+          <p class="stack">C++, object-oriented design, Git</p>
         </li>
       </ul>
     </section>
@@ -97,17 +94,21 @@
       <h2>Experience</h2>
       <dl class="timeline">
         <div>
-          <dt>[Year] – present</dt>
-          <dd><strong>B.S. Mathematics and Computer Science</strong>, Michigan State University. Coursework in computer architecture, systems programming, data structures, and advanced mathematics.</dd>
+          <dt>July 2026 – present</dt>
+          <dd><strong>Lead Software Developer</strong>, North Peak Leads, Grand Rapids, MI. Built a client intake website that gathers information to generate quotes and follow-ups, backed by a SQL database I built from scratch to track clients, appointments, and other key records.</dd>
         </div>
         <div>
-          <dt>[Years]</dt>
-          <dd><strong>Lead Programmer</strong>, FRC Team 3357. Led the software team, set up version control and testing practices, and owned the robot's control code.</dd>
+          <dt>Expected May 2028</dt>
+          <dd><strong>B.S. Computer Science and B.A. Mathematics</strong>, Michigan State University, East Lansing, MI.</dd>
+        </div>
+        <div>
+          <dt>May 2022 – Aug 2024</dt>
+          <dd><strong>Lead Programmer</strong>, FRC Team 3357, Grand Rapids, MI. Led the team's programming to multiple world championship wins, taught new students C++ and our problem-solving process, and used Git so several students could work on the codebase at once.</dd>
         </div>
       </dl>
 
       <h3 class="subhead">Tools I use</h3>
-      <p class="skills">C++, Python, Git, wxWidgets, SQLite, CMake, unit testing, multithreading</p>
+      <p class="skills">Python, C++, Java, C, SQL, Git, wxWidgets, Visual Paradigm, Unix/Linux, UML design, codebase management</p>
     </section>
 
     <section id="contact" class="section contact">
