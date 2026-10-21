@@ -1,0 +1,235 @@
+/* Board page. Colors come from the tokens in /styles.css, so the board
+   follows the site's palette in both light and dark mode. */
+
+:root {
+  /* Board colors: greens from the site palette, kept the same in dark mode
+     so both white and black pieces stay easy to see on every square. */
+  --board-light: #e6ede4;
+  --board-dark: #7fa08a;
+  --hl-last: rgba(214, 219, 92, 0.55);
+  --hl-selected: rgba(24, 69, 59, 0.4);
+  --hl-target: rgba(24, 69, 59, 0.38);
+  --hl-check: rgba(214, 64, 52, 0.85);
+}
+
+.intro { margin: 0 0 32px; }
+
+.game {
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(0, 300px);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+
+/* ---------- Board ---------- */
+
+.board-wrap { position: relative; }
+
+/* Named "chessboard" because the homepage already uses .board for its demo. */
+.chessboard {
+  touch-action: none;            /* dragging a piece shouldn't scroll the page */
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 0 0 2px var(--ink);
+  user-select: none;
+  container-type: inline-size;   /* lets pieces size themselves from the board width */
+}
+
+.sq {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  cursor: default;
+  font: inherit;
+}
+.sq.light { background: var(--board-light); }
+.sq.dark  { background: var(--board-dark); }
+.sq.movable { cursor: grab; }
+.sq.target, .sq.target-capture { cursor: pointer; }
+body.dragging, body.dragging .sq { cursor: grabbing; }
+
+/* The piece being dragged: its home square shows a faded copy. */
+.sq.drag-from img, .sq.drag-from .glyph { opacity: 0.3; }
+.drag-ghost {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+}
+.drag-ghost img { width: 100%; height: 100%; }
+.drag-ghost .glyph { line-height: 1; }
+
+/* Highlights are drawn as overlays so they combine with either square color. */
+.sq::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.sq.last::before     { background: var(--hl-last); }
+.sq.selected::before { background: var(--hl-selected); }
+.sq.check::before    { background: radial-gradient(circle, var(--hl-check) 0%, transparent 72%); }
+
+/* Legal-move markers: a dot on empty squares, a ring around capturable pieces. */
+.sq.target::after,
+.sq.target-capture::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.sq.target::after {
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: var(--hl-target);
+}
+.sq.target-capture::after {
+  inset: 4%;
+  border-radius: 50%;
+  border: 0.45em solid var(--hl-target);
+}
+
+/* Pieces are positioned over the square, so they can never stretch a row. */
+.sq img,
+.sq .glyph {
+  position: absolute;
+  inset: 6%;
+  width: 88%;
+  height: 88%;
+  pointer-events: none;
+}
+.sq .glyph {
+  display: grid;
+  place-items: center;
+  font-size: 10cqw;     /* 10% of the board's width */
+  line-height: 1;
+}
+.glyph-w { color: #fbfbf8; text-shadow: 0 0 2px #111, 0 0 1px #111; }
+.glyph-b { color: #161616; text-shadow: 0 0 2px rgba(255, 255, 255, 0.35); }
+
+.coord {
+  position: absolute;
+  font-size: clamp(0.55rem, 1.4vw, 0.75rem);
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+.sq.light .coord { color: var(--board-dark); }
+.sq.dark .coord  { color: var(--board-light); }
+.coord-rank { top: 4px; left: 4px; }
+.coord-file { bottom: 3px; right: 4px; }
+
+.sq:focus-visible { outline: 3px solid var(--green-lit); outline-offset: -3px; z-index: 1; }
+
+/* ---------- Promotion picker ---------- */
+
+.promo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  background: color-mix(in srgb, var(--paper) 85%, transparent);
+  border-radius: var(--radius-sm);
+}
+.promo[hidden] { display: none; }
+.promo p { margin: 0; font-weight: 700; }
+.promo-choices { display: flex; gap: 8px; }
+.promo-choice {
+  width: clamp(56px, 12vw, 80px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--board-light);
+  cursor: pointer;
+  padding: 0;
+}
+.promo-choice:hover { border-color: var(--green); }
+.promo-choice img { width: 85%; height: 85%; }
+.promo-choice .glyph { font-size: clamp(2.2rem, 8vw, 3.4rem); line-height: 1; }
+
+/* ---------- Side panel ---------- */
+
+.panel { display: grid; gap: 24px; }
+
+.status {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  min-height: 1.6em;
+}
+.status-error { color: #b3362c; font-size: 1rem; }
+
+.controls { display: grid; gap: 10px; justify-items: start; }
+.small-controls { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.controls .button { width: 100%; text-align: center; border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+.button-secondary {
+  background: transparent;
+  color: var(--green);
+  box-shadow: inset 0 0 0 2px var(--green);
+}
+.button-secondary:hover { background: var(--paper-2); color: var(--green); }
+.button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.text-button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  color: var(--green);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.text-button:disabled { color: var(--ink-soft); opacity: 0.6; cursor: not-allowed; text-decoration: none; }
+
+.think { display: grid; gap: 6px; font-weight: 600; font-size: 0.95rem; }
+.think select {
+  font: inherit;
+  font-weight: 400;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  max-width: 220px;
+}
+
+.moves h2 { font-size: 1.05rem; font-weight: 700; margin: 0 0 8px; }
+.moves {
+  max-height: 260px;
+  overflow-y: auto;
+  border-top: 1px solid var(--rule);
+  padding-top: 12px;
+}
+.moves ol {
+  margin: 0;
+  padding-left: 2.2em;
+  font-variant-numeric: tabular-nums;
+  white-space: pre;
+}
+.moves li { padding: 1px 0; }
+
+.source-link { margin-top: 40px; }
+
+@media (max-width: 820px) {
+  .game { grid-template-columns: 1fr; }
+}

@@ -3,41 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Play my chess engine | Benjamin Chatman</title>
+  <title>Play my chess engine | Ben [Last Name]</title>
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="chess.css">
 </head>
 <body>
   <header class="site-header">
     <a class="wordmark" href="/">Benjamin Chatman</a>
     <nav aria-label="Main">
       <a href="/#projects">Projects</a>
-      <a href="/Resume%20-%20Benjamin%20Chatman.pdf">Résumé</a>
+      <a href="/resume.pdf">Résumé</a>
       <a href="/#contact">Contact</a>
     </nav>
   </header>
 
   <main class="page">
     <h1>Play my chess engine</h1>
-    <p>
-      The engine runs entirely in your browser. It's my C++ engine compiled to
-      WebAssembly with Emscripten, searching in a Web Worker so the page stays
-      responsive while it thinks.
+    <p class="intro">
+      My C++ engine, compiled to WebAssembly and running entirely in your
+      browser. Drag a piece, or click it and then click where it should go.
     </p>
 
-    <!-- Replace this block with your board UI once the WebAssembly build is ready. -->
-    <div class="placeholder" id="game">
-      The board will go here once the WebAssembly build is ready.
+    <div class="game">
+      <div class="board-wrap">
+        <div class="chessboard" id="board" role="grid" aria-label="Chessboard"></div>
+
+        <div class="promo" id="promo" hidden>
+          <p>Promote to</p>
+          <div class="promo-choices" id="promo-choices"></div>
+          <button type="button" class="text-button" id="promo-cancel">Cancel</button>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Game controls">
+        <p class="status" id="status" aria-live="polite">Loading the engine…</p>
+
+        <div class="controls">
+          <button type="button" class="button" id="new-white">New game as White</button>
+          <button type="button" class="button button-secondary" id="new-black">New game as Black</button>
+          <div class="small-controls">
+            <button type="button" class="text-button" id="undo">Take back move</button>
+            <button type="button" class="text-button" id="sound" aria-pressed="true">Sound on</button>
+          </div>
+        </div>
+
+        <label class="think">
+          Engine thinking time
+          <select id="think-time">
+            <option value="250">0.25 seconds</option>
+            <option value="1000" selected>1 second</option>
+            <option value="3000">3 seconds</option>
+          </select>
+        </label>
+
+        <div class="moves">
+          <h2>Moves</h2>
+          <ol id="move-list"></ol>
+        </div>
+      </aside>
     </div>
 
-    <p><a href="https://github.com/bennyjjumpin/chess-engine">Read the source on GitHub</a></p>
+    <p class="source-link"><a href="https://github.com/bennyjjumpin/Chess-Engine">Read the source on GitHub</a></p>
   </main>
 
   <footer class="site-footer">
     <p>© 2026 Benjamin Chatman</p>
   </footer>
+
+  <script src="chess.js" defer></script>
 </body>
 </html>
