@@ -487,6 +487,9 @@
     else if (state.status === "checkmate")
       text = state.side === playerColor ? "Checkmate. The engine wins." : "Checkmate. You win!";
     else if (state.status === "stalemate") text = "Stalemate. It's a draw.";
+    else if (state.status === "draw-repetition") text = "Draw by threefold repetition.";
+    else if (state.status === "draw-fifty") text = "Draw by the 50-move rule.";
+    else if (state.status === "draw-material") text = "Draw: neither side can checkmate.";
     else if (state.side === playerColor)
       text = state.inCheck ? "You're in check. Your move." : "Your move.";
     else text = "";
