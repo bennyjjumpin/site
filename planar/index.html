@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download Planar | Benjamin Chatman</title>
+  <meta name="description" content="Planar, a desktop app for listening to music together in sync. Free download for macOS and Windows.">
+  <link rel="icon" href="/planar/planar.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="/">Benjamin Chatman</a>
+    <nav aria-label="Main">
+      <a href="/#projects">Projects</a>
+      <a href="/Resume%20-%20Benjamin%20Chatman.pdf">Résumé</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="page">
+    <div class="app-title">
+      <img src="/planar/planar.svg" width="64" height="64" alt="">
+      <h1>Planar</h1>
+    </div>
+    <p class="lede">
+      Listen to music together, in sync. One person creates a room and shares
+      its 6-character code, everyone adds songs to a shared queue, and playback
+      stays lined up on every computer.
+    </p>
+
+    <section class="downloads" aria-labelledby="dl-heading">
+      <h2 id="dl-heading">Download</h2>
+      <div class="download-grid">
+        <div class="download">
+          <h3>macOS</h3>
+          <p class="stack">macOS 13 or newer, Apple Silicon and Intel</p>
+          <a class="button" href="https://github.com/bennyjjumpin/Planar/releases/latest/download/Planar-mac.zip" download>Download for Mac</a>
+          <p class="note">Unzip and move Planar to Applications. The first time you open it, macOS will block it: go to System Settings → Privacy &amp; Security and click <strong>Open Anyway</strong>.</p>
+        </div>
+        <div class="download">
+          <h3>Windows</h3>
+          <p class="stack">64-bit (x64) Windows</p>
+          <a class="button" href="https://github.com/bennyjjumpin/Planar/releases/latest/download/Planar-windows.zip" download>Download for Windows</a>
+          <p class="note">Unzip the whole folder and run <code>Planar.exe</code>. If SmartScreen appears, click <strong>More info</strong> → <strong>Run anyway</strong>.</p>
+        </div>
+      </div>
+      <p class="note">These warnings appear because the app isn't signed with a paid developer certificate yet. Both downloads always serve the newest release.</p>
+    </section>
+
+    <section class="how" aria-labelledby="how-heading">
+      <h2 id="how-heading">How it works</h2>
+      <ul class="facts">
+        <li>Playback runs through the official YouTube player, so nothing is downloaded or ripped. Clients share only video IDs and small control messages.</li>
+        <li>Each room has a single relay on Cloudflare Durable Objects that holds the authoritative state and acts as the shared clock.</li>
+        <li>Clients sync their clocks with Cristian's algorithm, and starts are scheduled about 200 ms ahead so every computer begins at the same moment.</li>
+        <li>Written in C++ with wxWidgets. The relay server is TypeScript.</li>
+      </ul>
+      <p class="feature-links">
+        <a class="text-link" href="https://github.com/bennyjjumpin/Planar">Source code</a>
+        <a class="text-link" href="https://github.com/bennyjjumpin/Planar/releases">All releases</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Benjamin Chatman. Built by hand, hosted on Cloudflare Pages.</p>
+  </footer>
+</body>
+</html>
