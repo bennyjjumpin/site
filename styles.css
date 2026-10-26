@@ -206,6 +206,27 @@ h1, h2, h3 { line-height: 1.15; margin: 0; }
   color: var(--ink-soft); text-align: center; padding: 24px;
 }
 
+/* ---------- Planar download page ---------- */
+.app-title { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+.app-title h1 { margin: 0; }
+.page h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 20px; }
+.downloads, .how { margin-top: clamp(32px, 5vw, 56px); }
+.download-grid {
+  display: grid; gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  max-width: 820px;
+}
+.download {
+  background: var(--paper-2);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 3vw, 32px);
+}
+.download h3 { font-size: 1.4rem; font-weight: 800; }
+.download .stack { margin: 4px 0 20px; }
+.note { color: var(--ink-soft); font-size: 0.95rem; }
+.download .note { margin: 16px 0 0; }
+.page code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.9em; }
+
 /* ---------- Mobile ---------- */
 @media (max-width: 820px) {
   .hero { grid-template-columns: 1fr; }
